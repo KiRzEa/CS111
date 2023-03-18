@@ -13,7 +13,7 @@ set<string> process_text(string str)
 
     for (auto x: str)
     {
-        if ((x >= 48 && x <= 57) || (x >= 65 && x <= 90) || (x >= 97 && x <= 122))
+        if ((x >= 65 && x <= 90) || (x >= 97 && x <= 122))
         {
             word += x;
         }
