@@ -6,21 +6,21 @@
 
 using namespace std;
 
-set<string> process_text(string str)
+set<wstring> process_text(wstring str)
 {
-    string word = "";
-    set<string> word_list;
+    wstring word = L"";
+    set<wstring> word_list;
 
     for (auto x: str)
     {
-        if ((x >= 65 && x <= 90) || (x >= 97 && x <= 122))
+        if (x == ' ' || x == '.' || x == '!' || x == ',' || x == '?')
         {
-            word += x;
+            word_list.insert(word);
+            word = L"";
         }
         else
         {
-            word_list.insert(word);
-            word = "";
+            word += x;
         }
     }
     return word_list;
@@ -28,13 +28,13 @@ set<string> process_text(string str)
 
 int main()
 {
-    ifstream fileA;
-    ifstream fileB;
+    wifstream fileA;
+    wifstream fileB;
 
     fileA.open("FileA.txt");
     
-    string word;
-    map<string, int> vocab;
+    wstring word;
+    map<wstring, int> vocab;
 
     while (!fileA.eof())
     {
@@ -45,13 +45,13 @@ int main()
     
     fileB.open("FileB.txt");
 
-    set<string> B_in_A;
-    string line;
+    set<wstring> B_in_A;
+    wstring line;
     
     while (!fileB.eof())
     {
         getline(fileB, line);
-        set<string> word_list = process_text(line);
+        set<wstring> word_list = process_text(line);
         for (auto word : word_list)
         {
             if (vocab[word] == 1)
